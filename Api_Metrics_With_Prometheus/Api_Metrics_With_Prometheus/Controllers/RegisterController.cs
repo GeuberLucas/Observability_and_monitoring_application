@@ -1,5 +1,6 @@
 ﻿using Api_Metrics_With_Prometheus.Dominio.Register;
 using Api_Metrics_With_Prometheus.Interface;
+using Humanizer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,12 +37,20 @@ namespace Api_Metrics_With_Prometheus.Controllers
         {
             try
             {
-                IEnumerable<RegisterModel> registers = await _registerRepository.GetAllAsync();
-                return Ok(registers);
+                Random random = new Random();
+                if (random.Next(0, 100) % 2 == 0)
+                {
+
+                    IEnumerable<RegisterModel> registers = await _registerRepository.GetAllAsync();
+                    return Ok(registers);
+                }
+                else { 
+                    return BadRequest("Error");
+                }
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return StatusCode(500,ex.Message);
             }
         }
 
