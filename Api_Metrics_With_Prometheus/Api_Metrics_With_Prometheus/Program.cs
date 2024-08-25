@@ -3,6 +3,7 @@ using Api_Metrics_With_Prometheus.Dominio;
 using Api_Metrics_With_Prometheus.Services;
 using Microsoft.EntityFrameworkCore;
 using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseUrls("http://*:80");
@@ -20,21 +21,15 @@ builder.Services.AddInjections();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddOpenTelemetry().WithMetrics(bd =>
+builder.Services.AddOpenTelemetry().ConfigureResource(resource => resource.AddService("register people")).WithMetrics(bd =>
 {
-    bd.AddMeter("Microsoft.AspNetCore.Routing");
-    bd.AddMeter("Microsoft.AspNetCore.Hosting");
-    bd.AddMeter("Microsoft.AspNetCore.Diagnostics");
-    bd.AddMeter("Microsoft.AspNetCore.Http.Connections");
-    bd.AddMeter("Microsoft.AspNetCore.Server.Kestrel");
-    bd.AddAspNetCoreInstrumentation();
+    
+    bd.AddMeter("Microsoft.AspNetCore.Routing", "Microsoft.AspNetCore.Hosting", "Microsoft.AspNetCore.Server.Kestrel");
+    
     bd.AddPrometheusExporter();
 
+    
 
-}).WithTracing(tracing =>
-{
-    tracing.AddAspNetCoreInstrumentation();
-    tracing.AddHttpClientInstrumentation();
 });
 
 
