@@ -1,6 +1,3 @@
-Aqui está um exemplo de um arquivo README para o seu repositório:
-
----
 
 # Projeto de Monitoramento de Aplicação com Docker Compose
 
@@ -28,20 +25,19 @@ Antes de começar, certifique-se de ter o seguinte instalado em sua máquina:
 ## Estrutura do Projeto
 
 ```plaintext
-├── src
-│   └── Api
+├── Api
+│   └── Api_Metrics_With_Prometheus.sln
+│   └── Api_Metrics_With_Prometheus
 │       ├── Controllers
 │       ├── Models
 │       ├── Program.cs
 │       ├── Startup.cs
 │       └── ...
 ├── docker-compose.yml
-├── prometheus
-│   └── prometheus.yml
+├── prometheus.yml
 ├── grafana
-│   └── provisioning
-│       └── dashboards
-│           └── dashboard.json
+├── DataBaseVolume/data
+│   
 └── README.md
 ```
 
@@ -50,17 +46,17 @@ Antes de começar, certifique-se de ter o seguinte instalado em sua máquina:
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
-   cd seu-repositorio
+   git clone https://github.com/GeuberLucas/Observability_and_monitoring_application.git
+   cd Observability_and_monitoring_application
    ```
 
-2. Crie um arquivo `.env` na raiz do projeto e defina as variáveis de ambiente necessárias (como conexão com o banco de dados).
 
 ## Executando a Aplicação
 
 Para iniciar todos os serviços, execute o comando:
 
 ```bash
+docker-compose build
 docker-compose up -d
 ```
 
@@ -71,15 +67,14 @@ Isso iniciará os containers da API, do banco de dados, do Prometheus e do Grafa
 Após iniciar a aplicação, você pode acessar a documentação da API pelo Swagger no seguinte endereço:
 
 ```
-http://localhost:5000/swagger
+http://localhost:8090/swagger
 ```
 
 ## Monitoramento com Prometheus e Grafana
 
-- **Prometheus**: Acesse o Prometheus em `http://localhost:9090`.
-- **Grafana**: Acesse o Grafana em `http://localhost:3000`. As credenciais padrão são `admin` para usuário e `admin` para senha.
+- **Prometheus**: Acesse o Prometheus em `http://localhost:8091`.
+- **Grafana**: Acesse o Grafana em `http://localhost:8092`. As credenciais padrão são `admin` para usuário e `admin` para senha.
 
-Dentro do Grafana, você pode importar o dashboard localizado em `grafana/provisioning/dashboards/dashboard.json`.
 
 ## Parando e Removendo os Containers
 
