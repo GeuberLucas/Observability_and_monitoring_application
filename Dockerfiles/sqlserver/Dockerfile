@@ -16,8 +16,6 @@ VOLUME /var/opt/mssql/data
 # Copy the initialization script
 COPY init-db.sh /usr/src/app/init-db.sh
 
-# Ensure the script has execution permissions
-RUN chmod +x /usr/src/app/init-db.sh
 
 # Set the entry point to the initialization script
 ENTRYPOINT ["/usr/src/app/init-db.sh"]
