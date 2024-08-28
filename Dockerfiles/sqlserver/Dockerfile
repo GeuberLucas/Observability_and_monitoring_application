@@ -1,6 +1,10 @@
 # Dockerfile for SQL Server
 FROM mcr.microsoft.com/mssql/server:2022-latest
 
+# Install the necessary packages
+RUN apt-get update && apt-get install -y sudo
+RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
+USER docker
 # Set environment variables for SQL Server
 ENV MSSQL_SA_PASSWORD=@d$]8~q4B]}@BcL)
 ENV ACCEPT_EULA=Y
