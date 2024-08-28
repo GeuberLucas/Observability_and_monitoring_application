@@ -6,3 +6,6 @@ EXPOSE 3000
 
 # Volume for Grafana data
 VOLUME /var/lib/grafana
+
+# Set the entry point to start Grafana
+ENTRYPOINT ["/run.sh"]

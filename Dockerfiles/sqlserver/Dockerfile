@@ -11,3 +11,6 @@ EXPOSE 1433
 
 # Volume for SQL Server data
 VOLUME /var/opt/mssql/data
+
+# Set the entry point to start SQL Server
+ENTRYPOINT ["/opt/mssql/bin/sqlservr"]
