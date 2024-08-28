@@ -10,6 +10,5 @@ ENV MSSQL_PID=Express
 # Expose the default SQL Server port
 EXPOSE 1433
 
-# Volume for SQL Server data
-VOLUME /var/opt/mssql/data
 
+CMD ["/opt/mssql/bin/sqlservr"]
