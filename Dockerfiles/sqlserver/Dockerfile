@@ -13,7 +13,6 @@ EXPOSE 1433
 # Volume for SQL Server data
 VOLUME /var/opt/mssql/data
 
-RUN chown -R mssql:mssql /var/opt/mssql
 
 # Set the entry point to start SQL Server
 CMD ["/opt/mssql/bin/sqlservr"]
