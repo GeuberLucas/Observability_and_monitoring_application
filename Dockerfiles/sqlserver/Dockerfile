@@ -12,5 +12,11 @@ EXPOSE 1433
 # Volume for SQL Server data
 VOLUME /var/opt/mssql/data
 
-# Set the entry point to start SQL Server
-ENTRYPOINT ["/opt/mssql/bin/sqlservr"]
+# Copy the initialization script
+COPY init-db.sh /usr/src/app/init-db.sh
+
+# Ensure the script has execution permissions
+RUN chmod +x /usr/src/app/init-db.sh
+
+# Set the entry point to the initialization script
+ENTRYPOINT ["/usr/src/app/init-db.sh"]
