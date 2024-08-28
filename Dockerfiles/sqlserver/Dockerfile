@@ -2,7 +2,8 @@
 FROM mcr.microsoft.com/mssql/server:2022-latest
 
 # Install the necessary packages
-RUN apt-get update && apt-get install -y sudo
+RUN apt-get update && apt-get install -y
+
 RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
 USER docker
 # Set environment variables for SQL Server
