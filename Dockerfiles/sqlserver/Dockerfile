@@ -1,13 +1,17 @@
-# Dockerfile for SQL Server
-FROM mcr.microsoft.com/mssql/server:2022-latest
+# Dockerfile for MySQL
+FROM mysql:8.0
 
-# Set environment variables for SQL Server
-ENV MSSQL_SA_PASSWORD=@d$]8~q4B]}@BcL)
-ENV ACCEPT_EULA=Y
-ENV MSSQL_PID=Express
+# Set environment variables for MySQL
+ENV MYSQL_ROOT_PASSWORD=rootpassword
+ENV MYSQL_DATABASE=mydatabase
+ENV MYSQL_USER=myuser
+ENV MYSQL_PASSWORD=mypassword
 
-# Expose the default SQL Server port
-EXPOSE 1433
+# Expose the default MySQL port
+EXPOSE 3306
 
-# Volume for SQL Server data
-VOLUME /var/opt/mssql/data
+# Volume for MySQL data
+VOLUME /var/lib/mysql
+
+# Set the entry point to start MySQL
+CMD ["mysqld"]
