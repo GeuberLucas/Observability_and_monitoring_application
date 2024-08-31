@@ -7,11 +7,11 @@ using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.UseUrls("http://*:80");
-
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseMySql(connectionString,ServerVersion.AutoDetect(connectionString));
 });
 
 builder.Services.AddControllers();

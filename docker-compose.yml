@@ -1,19 +1,20 @@
 version: '3'
 services:
-  sqlserver:
+  mysql:
     build:
       context: .
-      dockerfile: Dockerfile.sqlserver
-    container_name: sqlserver
-    hostname: sqlserver
+      dockerfile: Dockerfile.mysql
+    container_name: mysql
+    hostname: mysql
     environment:
-      MSSQL_SA_PASSWORD: "@d$]8~q4B]}@BcL)"
-      ACCEPT_EULA: Y
-      MSSQL_PID: "Express"
+      MYSQL_ROOT_PASSWORD: "@d$]8~q4B]}@BcL)"
+      MYSQL_DATABASE: ObservabilityDB
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: "@d$]8~q4B]}@BcL)"
     ports:
-      - 1433:1433
+      - 3306:80
     volumes:
-      - ./DataBaseVolume/data:/var/opt/mssql/data
+      - ./DataBaseVolume/data:/var/lib/mysql
 
   app:
     container_name: api

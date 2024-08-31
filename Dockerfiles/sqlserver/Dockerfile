@@ -7,8 +7,11 @@ ENV MYSQL_DATABASE=mydatabase
 ENV MYSQL_USER=myuser
 ENV MYSQL_PASSWORD=mypassword
 
-# Expose the default MySQL port
-EXPOSE 3306
+# Copy custom MySQL configuration
+COPY my.cnf /etc/mysql/my.cnf
+
+# Expose the custom MySQL port
+EXPOSE 80
 
 # Volume for MySQL data
 VOLUME /var/lib/mysql
