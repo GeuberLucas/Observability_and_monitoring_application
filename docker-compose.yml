@@ -39,3 +39,12 @@ services:
       - ./grafana:/var/lib/grafana
     depends_on:
       - prometheus
+
+  k6:
+    container_name: k6
+    image: grafana/k6:latest-with-browser
+    volumes:
+      - ./k6-scripts:/scripts
+    entrypoint: ["k6", "run", "/scripts/index.js"]
+    depends_on:
+      - app
